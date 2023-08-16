@@ -1,0 +1,63 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styling/index.css">
+    <script src="scripting/index.js" defer></script>
+    <script src="scripting/users.js" defer></script>
+    <script src="scripting/expense.js" defer></script>
+    <title>Expense App - OOP</title>
+</head>
+<body>
+    <section id="entrance-section">
+
+        <div class="entrance-section__body">
+            <form id="signin-section__form">
+                <input type="text" name="username" placeholder="Username">
+                <input type="password" name="password" placeholder="Password">
+              
+
+               <button type="submit">Sign In</button>
+               <br>
+                
+               <p>Already have an account? <a href="#" class="signup-btn__toggle">Sign Up</a></p>
+            </form>
+    
+            <form id="signup-section__form" class="hide-form">
+                <input type="text" name="complete-name" placeholder="Complete Name">
+                <input type="text" name="username" placeholder="Username">
+                <input type="password" name="password" placeholder="Password">
+                <button type="submit">Create Account</button>
+                <br>
+                
+                <p>Already have an account? <a href="#" class="signin-btn__toggle">Sign In</a></p>
+                
+            </form>
+        </div>
+        
+    </section>
+
+    <main class="hide-form">
+        <div class="main-controller">
+            
+            <form id="expense-form">
+                <button class="fa fa-plus-square fa-3x" type="submit"></button>
+                <input type="text" name="expense-title">
+                <input type="number" name="expense-amount">
+                
+            </form>
+
+            <div id="expense-logs">
+                
+            </div>
+        </div>
+    </main>
+
+   
+</body>
+</html>

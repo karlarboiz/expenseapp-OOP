@@ -1,0 +1,181 @@
+:root {
+    --primary-color:#E8FFCE; 
+    --secondary-color: #ACFADF;
+    --calltoaction-color: #7C73C0;
+    --background-color: #94ADD7;
+
+    --sectiontext-fontsize: 2.5rem;
+    --subsectiontext-fontsize: 1.5rem;
+    --regulartext-fontsize: .95rem;
+    --centering-elements-using-margin: 0 auto;
+    --centering-expense-logs: 2.5rem auto 0 auto;
+    --input-margin: .5rem auto;
+    --border-radius-design: .25rem;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--background-color);
+    font-family: 'Poppins', sans-serif;
+}
+/* common designs of buttons and inputs */
+button {
+    padding: .5rem 1.05rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+input,textarea {
+    max-width: 25rem;
+    padding: .65rem .75rem;
+    margin: var(--input-margin);
+    font-size: 1.05rem;
+    display: block;
+}
+
+button, input{
+    border-radius: var(--border-radius-design);
+    border: none;
+}
+
+/* end of common designs of buttons and inputs */
+
+/* start of entrance-section */
+.entrance-section__body {
+    max-width: 50rem;
+    min-height: 25rem;
+    margin: var(--centering-elements-using-margin);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.entrance-section__body form {
+    text-align: center;
+}
+
+/* end of entrance-section */
+    
+/* hiding form */
+.hide-form {
+    display: none;
+}
+
+/* end of hiding form */
+
+
+/* design of main */
+main {
+    max-width: 100vw;
+    min-height: 100vh;
+
+}
+
+main form {
+    display:flex;
+    align-items: center;
+    max-width: 50%;
+
+}
+
+main form button {
+    background-color: unset;
+    
+}
+
+/* end of main design */
+
+/* expense logs design */
+#expense-logs {
+    max-width: 85%;
+    margin: var(--centering-expense-logs);
+}
+/* end of expense logs design */
+
+/* expense logs design */
+#expense-logs {
+    max-width: 100%;
+    display: grid;
+    grid-template-columns: 15rem 15rem 15rem 15rem ;
+    grid-auto-rows: 10rem;
+    gap: 1.25rem 1.50rem;
+    justify-content: center ;
+
+}
+/* end of expense logs design */
+/* expense item design */
+.expense-item {
+    border: 1px solid black;
+
+    position: relative;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: var(--border-radius-design);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    animation: moveExpenseItem .5s ease-in;
+}
+
+@keyframes moveExpenseItem {
+    from {
+        top: -2.5rem;
+        opacity: 0;
+    }to {
+        top: 0rem;
+        opacity: 1;
+    }
+}
+
+.expense-item button {
+    background-color: unset;
+    position: absolute;
+    top: -10%;
+    left: 85%;
+}
+
+.expense-date {
+    line-height: 1.25rem;
+}
+/* end of expense item design */
+
+/* message container design */
+.message-container {
+    position: absolute;
+    top: 0%;
+    left: 50%;
+    transform: translate(-50%, 50%);
+
+    padding: 1.25rem 1.75rem;
+
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: var(--border-radius-design);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+
+    
+}
+
+.message-indicator__error {
+    color: rgba(220, 6, 6, .85);
+}
+
+.message-indicator__pass {
+    color: rgba(25, 154, 8, 0.85);
+}
+
+/* end of message container design */
