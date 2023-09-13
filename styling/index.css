@@ -122,18 +122,25 @@ main form button {
     border: 1px solid black;
 
     position: relative;
-    background: rgba(255, 255, 255, 0.2);
+    background: black;
     border-radius: var(--border-radius-design);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    border: 1px solid ;
 
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     animation: moveExpenseItem .5s ease-in;
+}
+
+.expense-item h4{
+    color: var(--secondary-color);
+    font-size: var(--subsectiontext-fontsize);
+}
+
+.expense-item p {
+    color: var(--primary-color);
 }
 
 @keyframes moveExpenseItem {
@@ -148,6 +155,7 @@ main form button {
 
 .expense-item button {
     background-color: unset;
+    color: var(--secondary-color);
     position: absolute;
     top: -10%;
     left: 85%;
