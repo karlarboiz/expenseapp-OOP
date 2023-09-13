@@ -1,6 +1,7 @@
-
-const rootUrl = 'https://expense-app-9b511-default-rtdb.asia-southeast1.firebasedatabase.app/';
 const signupForm = document.querySelector('#signup-section__form');
+const usersUrl = 'https://new-expense-app-default-rtdb.asia-southeast1.firebasedatabase.app/';
+const newNotification = document.querySelector('#notification');
+const signupFormInputs = document.querySelectorAll("#signup-section__form input");
 
 class User {
     constructor(name,username,password) {
@@ -21,9 +22,9 @@ class User {
     }
 
     async _insertUserInputs() {
-        let initalResult;
+        let initialResult;
         try {
-            initalResult = await fetch(`${rootUrl}users.json`,
+            initialResult = await fetch(`${usersUrl}users.json`,
             {
                 method: 'POST',
                 headers: {
@@ -36,24 +37,28 @@ class User {
                     signedupDate: new Date()
                 }   )
             })
-
-            if(!initalResult.ok) {
-                new Error('Something wrong during signup. Try again');
-                return;
+            if(!initialResult.ok) {
+                throw new Error('Something wrong during signup. Try again');
             }
-
-            this.outputData = initalResult.ok;
+        
+            this.outputData = initialResult.ok ? 'success' : 'error';
+            this._successfulSignedUp('Account successfully created!');
+            signupFormInputs.forEach(val=>val.value ='');
         }catch(error){
-            return error.message
+            this._successfulSignedUp(error.message);
+            return;
         }
     }
 
-    _successfulSignedUp(){
-        if(this.signedupData) {
-            return 'Account successfully created!'
-        }
+    _successfulSignedUp(message){
+        const messageDiv = document.createElement('div');
 
-        return 'Something went wrong with the process. Please try again';
+        messageDiv.classList.add('message-container',`message-indicator__${this.signedupData}`)
+        messageDiv.textContent = message;
+        
+        newNotification.append(messageDiv);  
+        setTimeout(()=>{messageDiv.remove()},3000)
+    
     }
 
     set outputData(val){
@@ -67,10 +72,10 @@ class User {
 
 signupForm.addEventListener('submit',(e)=>{
     e.preventDefault();
-    const dataForm = new FormData(signupForm);
-    
+    const dataForm = new FormData(signupForm);  
     const newUser = new User(dataForm.get('complete-name'),
     dataForm.get('username'),dataForm.get('password'));
     newUser._validateSignupInfo();
-    console.log(newUser._successfulSignedUp());
+    
+
 })

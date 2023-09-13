@@ -4,9 +4,8 @@ const signupBtnToggle = document.querySelector('.signup-btn__toggle');
 const signinBtnToggle = document.querySelector('.signin-btn__toggle');
 const signinSectionForm = document.querySelector('#signin-section__form');
 const signupSectionForm = document.querySelector('#signup-section__form');
-
-const rootUrl = 'https://expense-app-9b511-default-rtdb.asia-southeast1.firebasedatabase.app/';
-
+const mainUrl = 'https://new-expense-app-default-rtdb.asia-southeast1.firebasedatabase.app/';
+const notification = document.querySelector('#notification');
 class App {
 
     _toggleSignInSignUpPage(){
@@ -19,7 +18,7 @@ class App {
         let finalResult;
         let newArrFinalResult = [];
         try {
-            initalResult = await fetch(`${rootUrl}users.json`);
+            initalResult = await fetch(`${mainUrl}users.json`);
             
             if(!initalResult.ok){
                 new Error('Something went wrong')
@@ -51,7 +50,9 @@ class App {
             })
 
             if(!foundAcc) {
-                throw 'No Account found using the credentials'; 
+                this._showMessage('Credentials not found',true)
+
+                return;
             }
 
             this._showMessage('Welcome back!',false)
@@ -60,7 +61,7 @@ class App {
             main.classList.toggle('hide-form');
             
         }catch(error){
-            this._showMessage(error,true);
+            this._showMessage(error.message,true);
         }
        
     }
@@ -68,11 +69,11 @@ class App {
     _showMessage(message,isError){
         const messageDiv = document.createElement('div');
 
-        messageDiv.classList.add('message-container',`message-indicator__${isError ? 'error' : 'pass'}`)
+        messageDiv.classList.add('message-container',`message-indicator__${isError ? 'error' : 'success'}`)
         messageDiv.textContent = message;
         
-        document.querySelector('body').append(messageDiv);
-
+        notification.append(messageDiv);
+        
         setTimeout(()=>{messageDiv.remove()},3000)
     }
 }
@@ -90,3 +91,8 @@ signinSectionForm.addEventListener('submit',(e)=>{
     dataForm.get('password'));
 
 })
+
+
+
+
+

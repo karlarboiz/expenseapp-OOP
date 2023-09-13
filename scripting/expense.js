@@ -1,14 +1,12 @@
 const expenseLogs = document.querySelector('#expense-logs');
 const expenseForm = document.querySelector('#expense-form');
-const newRootUrl = 'https://expense-app-9b511-default-rtdb.asia-southeast1.firebasedatabase.app/';
+const newRootUrl = 'https://new-expense-app-default-rtdb.asia-southeast1.firebasedatabase.app/';
 const expenseFormInputs = document.querySelectorAll('#expense-form input');
-
+const anotherNotification = document.querySelector('#notification');
 class Expense {
     constructor(title,amount){
         this.title = title;
         this.amount = amount;
-
-        
     }
 
     async _insertUserExpenses() {
@@ -40,12 +38,13 @@ class Expense {
                 new Error('Something wrong during signup. Try again');
                 return;
             }
-
+            this._showMessage('Expense added',false);
             finalResult = await initalResult.json();
 
             
         }catch(error){
-            return error.message
+            this._showMessage(error.message,false);
+            return;
         }
 
         return finalResult;
@@ -56,7 +55,7 @@ class Expense {
         let finalResult;
         let usersArr = [];
         try {
-            initalResult = await fetch(`${rootUrl}expenses.json`);
+            initalResult = await fetch(`${newRootUrl}expenses.json`);
             
             if(!initalResult.ok){
                 new Error('Something went wrong')
@@ -82,7 +81,16 @@ class Expense {
         return usersArr;
     }
 
-    
+    _showMessage(message,isError){
+        const messageDiv = document.createElement('div');
+
+        messageDiv.classList.add('message-container',`message-indicator__${isError ? 'error' : 'success'}`)
+        messageDiv.textContent = message;
+        
+        anotherNotification.append(messageDiv);
+        
+        setTimeout(()=>{messageDiv.remove()},3000)
+    }
 
     get incrementedId(){
         return this._id;
@@ -149,7 +157,7 @@ Expense.prototype.createElementsHandler = (item,targetEl) =>{
 
 Expense.prototype.displayAllSavedExpenseLogs = async function(targetEl){
     const allData = await this._fetchedExpenseLogs();
-
+    
     allData.forEach(val=>{
         let newItem;
         for (const key in val) {
